@@ -6,7 +6,7 @@ A modern, full-stack web application boilerplate built with speed and developer 
 
 - **[React Router v7](https://reactrouter.com/en/main)** - Next generation routing with file-based routing, type safety, and server components
 - **[Prisma ORM](https://www.prisma.io/)** - Next-generation Node.js and TypeScript ORM
-- **[Better Auth](https://better-auth.netby.dev/)** - Simple and secure authentication
+- **[Better Auth](https://www.better-auth.com/)** - Simple and secure authentication
 - **[Turso](https://turso.tech/)** - Distributed SQLite database built on libSQL
 - **[shadcn/ui](https://ui.shadcn.com/)** - Re-usable components built with Radix UI and Tailwind CSS
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
