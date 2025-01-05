@@ -38,7 +38,7 @@ A modern, full-stack web application boilerplate built with speed and developer 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/breeze-stack.git
+   git clone https://github.com/osmanorhan/breeze-stack.git
    cd breeze-stack
    ```
 
