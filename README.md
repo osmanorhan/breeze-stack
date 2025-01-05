@@ -53,25 +53,24 @@ A modern, full-stack web application boilerplate built with speed and developer 
    DATABASE_AUTH_TOKEN="[your-token]"
    SESSION_SECRET="[your-session-secret]"
    ```
-
-4. Generate auth tables:
-   ```bash
-   npx @better-auth/cli generate
-   ```
-
-5. Generate Prisma client:
+4. Generate Prisma client:
    ```bash
    pnpm run db:generate
    ```
 
-6. Apply migrations:
+5. Generate auth tables:
    ```bash
-   npx prisma migrate dev --name init
+   pnpm dlx @better-auth/cli generate --config ./app/lib/auth.server.ts
    ```
 
-7. Apply migrations to Turso:
+6. Apply migrations:
    ```bash
-   turso db shell [your-db-name] < ./prisma/migrations/[migration-name]/migration.sql
+   pnpm dlx prisma migrate dev --name init
+   ```
+
+7. Apply initial migrations to Turso:
+   ```bash
+   turso db shell [your-db-name] < ./prisma/migrations/20250104172246_init/migration.sql
    ```
 
 ### Development
