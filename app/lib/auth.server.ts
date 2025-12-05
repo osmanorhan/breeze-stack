@@ -5,13 +5,16 @@ import { LibsqlDialect } from "@libsql/kysely-libsql";
 import { PrismaClient } from "@prisma/client";
 import { createAuthMiddleware } from "better-auth/api";
 
+const authSecret = (process.env.BETTER_AUTH_SECRET ?? process.env.SESSION_SECRET ?? "").trim();
 
-if (!process.env.SESSION_SECRET) {
-  throw new Error("SESSION_SECRET must be set");
+if (authSecret.length < 32) {
+  throw new Error(
+    "BETTER_AUTH_SECRET must be at least 32 characters. Set BETTER_AUTH_SECRET or SESSION_SECRET to a secure value."
+  );
 }
 
 export const auth = betterAuth({
-  secret: process.env.SESSION_SECRET,
+  secret: authSecret,
   database: prismaAdapter(prisma, {
     provider: "sqlite", // or "mysql", "postgresql", ...etc
   }),

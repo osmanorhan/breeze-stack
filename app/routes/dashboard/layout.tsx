@@ -1,7 +1,7 @@
 import { Outlet, Link, Form, redirect } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import type { Route } from "./+types/dashboard/layout";
+import type { Route } from "./+types/layout";
 import { auth } from "~/lib/auth.server";
 
 export async function loader({ request }: Route.LoaderArgs) {

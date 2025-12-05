@@ -16,19 +16,17 @@ import {
 } from "~/components/ui/card";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { auth } from "~/lib/auth.server";
-import type { Route } from "~/+types/auth/register";
+import type { Route } from "./+types/register";
 
 const schema = z.object({
   username: z
-    .string({ required_error: "Username is required" })
+    .string({ message: "Username is required" })
     .min(3, "Username must be at least 3 characters")
     .max(50, "Username must be less than 50 characters")
     .regex(/^[a-zA-Z0-9_-]+$/, "Username can only contain letters, numbers, underscores and dashes"),
-  email: z
-    .string({ required_error: "Email is required" })
-    .email("Invalid email address"),
+  email: z.string({ message: "Email is required" }).email("Invalid email address"),
   password: z
-    .string({ required_error: "Password is required" })
+    .string({ message: "Password is required" })
     .min(8, "Password must be at least 8 characters")
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
     .regex(/[a-z]/, "Password must contain at least one lowercase letter")
@@ -45,19 +43,13 @@ export async function action({ request }: Route.LoaderArgs) {
   }
 
   try {
-    const { data, error } = await auth.api.signUpEmail({
+    await auth.api.signUpEmail({
       body: {
         email: submission.value.email,
         password: submission.value.password,
         name: submission.value.username,
       },
     });
-
-    if (error) {
-      return submission.reply({
-        formErrors: [error.message || "Failed to create account"],
-      });
-    }
 
     try {
       const signInRes = await auth.api.signInEmail({

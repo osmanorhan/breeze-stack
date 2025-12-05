@@ -1,8 +1,22 @@
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import type { Route } from "~/+types/dashboard/home";
+import type { Route } from "./+types/home";
 import { auth } from "~/lib/auth.server";
+
+type Activity = {
+  id: number;
+  type: string;
+  name: string;
+  date: string;
+};
+
+type DashboardStats = {
+  totalProjects: number;
+  activeProjects: number;
+  completedProjects: number;
+  recentActivity: Activity[];
+};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await auth.api.getSession({ headers: request.headers });
@@ -11,7 +25,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   }
 
   // For demo purposes - you would typically fetch this from your database
-  const stats = {
+  const stats: DashboardStats = {
     totalProjects: 12,
     activeProjects: 8,
     completedProjects: 4,

@@ -1,9 +1,5 @@
-// app/routes/dashboard/layout.tsx
-import { Outlet, redirect } from "react-router";
-import { Link } from "react-router";
-import { Button } from "~/components/ui/button";
-import type { Route } from "./+types/dashboard/layout";
-import { auth } from "../../lib/auth.server";
+import { Outlet } from "react-router";
+import type { Route } from "./+types/layout";
 
 export async function loader({ request }: Route.LoaderArgs) {
 

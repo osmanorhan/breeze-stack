@@ -8,24 +8,24 @@ import { Input } from "~/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 import prisma from "~/lib/db.server";
 import { auth } from "~/lib/auth.server";
-import type { Route } from "~/+types/project/new";
+import type { Route } from "./+types/new";
 
 const schema = z.object({
   name: z
-    .string({ required_error: "Project name is required" })
+    .string({ message: "Project name is required" })
     .min(3, "Project name must be at least 3 characters")
     .max(50, "Project name must be less than 50 characters"),
   description: z
-    .string({ required_error: "Description is required" })
+    .string({ message: "Description is required" })
     .min(10, "Description must be at least 10 characters")
     .max(500, "Description must be less than 500 characters"),
   startDate: z
-    .string({ required_error: "Start date is required" })
+    .string({ message: "Start date is required" })
     .refine((date) => !isNaN(Date.parse(date)), {
       message: "Please enter a valid date",
     }),
   budget: z
-    .string({ required_error: "Budget is required" })
+    .string({ message: "Budget is required" })
     .refine(
       (val) => {
         const num = parseFloat(val);

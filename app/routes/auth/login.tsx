@@ -15,16 +15,12 @@ import {
 } from "~/components/ui/card";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { auth } from "~/lib/auth.server";
-import type { Route } from "~/+types/auth/login";
+import type { Route } from "./+types/login";
 
 // Schema for email login
 const emailLoginSchema = z.object({
-  email: z
-    .string({ required_error: "Email is required" })
-    .email("Invalid email address"),
-  password: z
-    .string({ required_error: "Password is required" })
-    .min(1, "Password is required"),
+  email: z.string({ message: "Email is required" }).email("Invalid email address"),
+  password: z.string({ message: "Password is required" }).min(1, "Password is required"),
 });
 
 // Schema for social login
@@ -42,12 +38,10 @@ export async function action({ request }: Route.ActionArgs) {
 
     try {
       const signInRes = await auth.api.signInSocial({
-        body: {
-          provider: "google",
-          asResponse: true,
-        },
+        body: { provider: "google" },
+        asResponse: true,
       });
-      return redirect(signInRes.url);
+      return signInRes;
     } catch (error) {
       console.error("Social login error:", error);
       return submission.reply({

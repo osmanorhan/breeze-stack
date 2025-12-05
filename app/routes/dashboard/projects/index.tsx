@@ -1,10 +1,9 @@
-// app/routes/dashboard/projects/index.tsx
 import { Button } from "~/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 import { auth } from "~/lib/auth.server";
 import prisma from "~/lib/db.server";
 import { Link, redirect } from "react-router";
-import type { Route } from "~/+types/dashboard/projects/index";
+import type { Route } from "./+types/index";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await auth.api.getSession({ headers: request.headers });
